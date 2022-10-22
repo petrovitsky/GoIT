@@ -3,7 +3,7 @@ package module7;
 public class ShortWordCounter {
     public int count(String phrase, int minLength){
         int result = 0;
-        String [] words = phrase.split("\s");
+        String [] words = phrase.split(" ");
         for (String s : words) {
             if (s.length()<= minLength){
                 result++;

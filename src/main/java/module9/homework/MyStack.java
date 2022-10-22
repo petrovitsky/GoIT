@@ -1,6 +1,6 @@
 package module9.homework;
 
-import org.jetbrains.annotations.NotNull;
+
 
 import java.util.Iterator;
 
@@ -56,7 +56,6 @@ public class MyStack <E> implements MyDeque<E> {
         return helper.peek();
     }
 
-    @NotNull
     @Override
     public Iterator<E> iterator() {
         return helper.iterator();

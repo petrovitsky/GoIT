@@ -1,6 +1,5 @@
 package module9.homework;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -158,7 +157,7 @@ public class MyLinkedList<E> implements MyList<E>, MyDeque<E> {
 //        }
     }
 
-    @NotNull
+
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {

@@ -1,8 +1,9 @@
 package module10;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,9 +41,23 @@ public class TestModule {
 
 //        phoneValidator("./file.txt");
 
-
-        frequencyCount("./words.txt");
-
+//        UserTest ut1 = new UserTest("Im", "dede");
+//        UserTest ut2 = new UserTest("dew", " 123");
+//        List<UserTest> list = List.of(ut1,ut2);
+//        Gson gson = new GsonBuilder().setPrettyPrinting().setLenient().create();
+//
+//        FileWriter fw = new FileWriter(new File("./json.json"));
+//        gson.toJson(list,fw);
+//        fw.flush();
+//        fw.close();
+        Gson gson = new Gson();
+        Reader fr = new FileReader("./json.json");
+        List<UserTest> newList = gson.fromJson(fr, List.class);
+        System.out.println("newList.size() = " + newList.size());
+        System.out.println("newList.get(0) = " + newList.get(0));
+        System.out.println("newList.get(1) = " + newList.get(1));
+        System.out.println("newList.add(new UserTest(\"Alex\", \"5\")) = " + newList.add(new UserTest("Alex", "5")));
+        System.out.println("newList.get(2) = " + newList.get(2));
 
     }
 
@@ -100,3 +115,20 @@ public class TestModule {
 
 }
 
+class UserTest {
+    private String login;
+    private String password;
+
+    public UserTest(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "UserTest{" +
+                "login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+}

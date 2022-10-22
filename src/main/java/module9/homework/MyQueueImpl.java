@@ -1,6 +1,5 @@
 package module9.homework;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 
@@ -38,7 +37,7 @@ public class MyQueueImpl<E> implements MyQueue<E> {
         return helper.peek();
     }
 
-    @NotNull
+
     @Override
     public Iterator iterator() {
         return helper.iterator();

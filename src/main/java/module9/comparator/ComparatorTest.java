@@ -1,6 +1,5 @@
 package module9.comparator;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -50,7 +49,7 @@ class Employee implements Comparable <Employee> {
     }
 
     @Override
-    public int compareTo(@NotNull Employee o) {
+    public int compareTo(Employee o) {
 
 
         return this.lastName.compareTo(o.getLastName());

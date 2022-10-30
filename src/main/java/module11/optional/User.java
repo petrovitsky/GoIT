@@ -30,6 +30,6 @@ public class User {
                 ", age=" + age +
                 ", position" +
                 "=" + position +
-                "}\n";
+                "}";
     }
 }

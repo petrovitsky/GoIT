@@ -2,6 +2,7 @@ package module11.homework;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Main {
@@ -13,7 +14,7 @@ public class Main {
 
         System.out.println(list);
 
-        System.out.println(oddNames(list));
+        System.out.println(oddNames1(list));
 
         System.out.println(upAndSort(list));
 
@@ -28,18 +29,11 @@ public class Main {
 
     }
 
-    public static String oddNames(List<String> list) {
-        StringBuilder sb = new StringBuilder();
-        int counter = 1;
-        final Iterator<String> iterator = list.stream().iterator();
-        while (iterator.hasNext()) {
-            iterator.next();
-            sb.append(counter + ". ").append(iterator.next() + ", ");
-            counter += 2;
-        }
-        sb.deleteCharAt(sb.length() - 2);
-
-        return sb.toString();
+    public static String oddNames1(List<String> list) {
+        return IntStream.range(0, list.size())
+                .filter(index -> index % 2 != 0)
+                .mapToObj(index-> String.format("%d. %s", index, list.get(index)))
+                .collect(Collectors.joining(", "));
     }
 
     public static List<String> upAndSort(List<String> list) {

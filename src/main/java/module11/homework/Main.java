@@ -14,14 +14,15 @@ public class Main {
         String[] data = new String[]{"1, 2, 0", "4, 5"};
 
         System.out.println(list);
+
         System.out.println(oddNames(list));
+
         System.out.println(upAndSort(list));
+
         System.out.println(getSortedDigitsFromStringArray(data));
 
-
-
-
-
+        final Stream<Long> longStream = infiniteStream(25214903917L, 11l, (long) Math.pow(2, 48), 99L);
+        System.out.println("longStream.collect(Collectors.toList()) = " + longStream.collect(Collectors.toList()));
     }
 
     public static String oddNames(List<String> list) {
@@ -40,12 +41,18 @@ public class Main {
                 .collect(Collectors.toList());
     }
 
-
-    public static String getSortedDigitsFromStringArray (String[] data){
-         return Arrays.stream(data)
+    public static String getSortedDigitsFromStringArray(String[] data) {
+        return Arrays.stream(data)
                 .map((s -> s.split(", ")))
                 .flatMap(Stream::of)
                 .sorted()
                 .collect(Collectors.joining(", "));
+    }
+
+    public static Stream<Long> infiniteStream(long a, long c, long m, long seed) {
+        LCGImpl random = new LCGImpl(a, c, m);
+        return Stream
+                .iterate(seed, random::next)
+                .limit(10);
     }
 }

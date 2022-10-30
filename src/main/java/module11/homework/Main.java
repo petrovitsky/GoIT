@@ -22,7 +22,6 @@ public class Main {
         final Stream<Long> longStream = infiniteStream(25214903917L, 11l, (long) Math.pow(2, 48), 99L);
         System.out.println("longStream.collect(Collectors.toList()) = " + longStream.collect(Collectors.toList()));
 
-
         Stream<Integer> s1 = Stream.of(1, 2, 3, 4, 5);
         Stream<Integer> s2 = Stream.of(10, 40, 60);
         System.out.println(zip(s1, s2).collect(Collectors.toList()));
@@ -58,7 +57,6 @@ public class Main {
                 .iterate(seed, random::next)
                 .limit(10);
     }
-
 
     public static <T> Stream<T> zip(Stream<T> first, Stream<T> second) {
         Iterator<T> firstIterator = first.iterator();

@@ -1,8 +1,6 @@
 package module11.homework;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,6 +21,11 @@ public class Main {
 
         final Stream<Long> longStream = infiniteStream(25214903917L, 11l, (long) Math.pow(2, 48), 99L);
         System.out.println("longStream.collect(Collectors.toList()) = " + longStream.collect(Collectors.toList()));
+
+
+        Stream<Integer> s1 = Stream.of(1, 2, 3, 4, 5);
+        Stream<Integer> s2 = Stream.of(10, 40, 60);
+        System.out.println(zip(s1, s2).collect(Collectors.toList()));
     }
 
     public static String oddNames(List<String> list) {
@@ -54,5 +57,17 @@ public class Main {
         return Stream
                 .iterate(seed, random::next)
                 .limit(10);
+    }
+
+
+    public static <T> Stream<T> zip(Stream<T> first, Stream<T> second) {
+        Iterator<T> firstIterator = first.iterator();
+        Iterator<T> secondIterator = second.iterator();
+        List<T> result = new ArrayList<>();
+        while (firstIterator.hasNext() && secondIterator.hasNext()){
+            result.add(firstIterator.next());
+            result.add(secondIterator.next());
+        }
+        return result.stream();
     }
 }

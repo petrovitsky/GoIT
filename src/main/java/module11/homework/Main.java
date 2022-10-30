@@ -25,14 +25,20 @@ public class Main {
         Stream<Integer> s1 = Stream.of(1, 2, 3, 4, 5);
         Stream<Integer> s2 = Stream.of(10, 40, 60);
         System.out.println(zip(s1, s2).collect(Collectors.toList()));
+
     }
 
     public static String oddNames(List<String> list) {
         StringBuilder sb = new StringBuilder();
-        for (int i = 1; i < list.size(); i += 2) {
-            sb.append(i + ". ").append(list.get(i) + ", ");
+        int counter = 1;
+        final Iterator<String> iterator = list.stream().iterator();
+        while (iterator.hasNext()) {
+            iterator.next();
+            sb.append(counter + ". ").append(iterator.next() + ", ");
+            counter += 2;
         }
         sb.deleteCharAt(sb.length() - 2);
+
         return sb.toString();
     }
 
@@ -62,10 +68,11 @@ public class Main {
         Iterator<T> firstIterator = first.iterator();
         Iterator<T> secondIterator = second.iterator();
         List<T> result = new ArrayList<>();
-        while (firstIterator.hasNext() && secondIterator.hasNext()){
+        while (firstIterator.hasNext() && secondIterator.hasNext()) {
             result.add(firstIterator.next());
             result.add(secondIterator.next());
         }
         return result.stream();
     }
+
 }

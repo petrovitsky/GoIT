@@ -11,11 +11,11 @@ public class TestModule {
 
     public static void main(String[] args) {
         List<User> users = Arrays.asList(
-                new User("Oleh", 35, Position.WORKER),
-                new User("Vika", 31, Position.MANAGER),
-                new User("Olha", 47, Position.WORKER),
-                new User("Vasyl ", 23, Position.MANAGER),
-                new User("Sergy", 22, Position.DIRECTOR));
+                new User("Oleh", 35, Position.WORKER, false),
+                new User("Vika", 31, Position.MANAGER, false),
+                new User("Olha", 47, Position.WORKER, false),
+                new User("Vasyl ", 23, Position.MANAGER, false),
+                new User("Sergy", 22, Position.DIRECTOR, false));
 
         System.out.println("users = " + users);
         System.out.println("Total age amount " + users.stream().mapToInt(User::getAge).sum());

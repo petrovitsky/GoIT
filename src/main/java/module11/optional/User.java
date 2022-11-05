@@ -5,10 +5,13 @@ public class User {
     private int age;
     private Position position;
 
-    public User(String name, int age, Position position) {
+    private boolean isOnVacation;
+
+    public User(String name, int age, Position position, boolean isOnVacation) {
         this.name = name;
         this.age = age;
         this.position = position;
+        this.isOnVacation = isOnVacation;
     }
 
     public String getName() {

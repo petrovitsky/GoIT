@@ -1,14 +1,13 @@
-package module12;
+package module12.homework.task1;
 
-public class Test {
+public class Task1 {
     public static void main(String[] args) {
-        TimePrinter1 time = new TimePrinter1();
-        new SecondsPrinter1(time);
-        new FiveSecondsNotification1(time);
+        TimePrinter time = new TimePrinter();
+        new SecondsPrinter(time);
+        new FiveSecondsNotification(time);
     }
 }
-
-class TimePrinter1 {
+class TimePrinter {
     private int second = 1;
     public synchronized void printSecond() {
         while (second < 5000) {
@@ -54,10 +53,10 @@ class TimePrinter1 {
     }
 }
 
-class SecondsPrinter1 extends Thread {
-    private TimePrinter1 printer;
+class SecondsPrinter extends Thread {
+    private TimePrinter printer;
 
-    public SecondsPrinter1(TimePrinter1 printer) {
+    public SecondsPrinter(TimePrinter printer) {
         this.printer = printer;
         this.start();
     }
@@ -68,10 +67,10 @@ class SecondsPrinter1 extends Thread {
     }
 }
 
-class FiveSecondsNotification1 extends Thread {
-    private TimePrinter1 printer;
+class FiveSecondsNotification extends Thread {
+    private TimePrinter printer;
 
-    public FiveSecondsNotification1(TimePrinter1 printer) {
+    public FiveSecondsNotification(TimePrinter printer) {
         this.printer = printer;
         this.start();
     }

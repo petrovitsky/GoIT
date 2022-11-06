@@ -1,26 +1,86 @@
 package module12;
 
 public class Test {
-    private static int counter;
+    public static void main(String[] args) {
+        TimePrinter time = new TimePrinter();
+        new SecondsPrinter(time);
+        new FiveSecondsNotification(time);
+    }
+}
 
-    public static void main(String[] args) throws InterruptedException {
-        Thread main = Thread.currentThread();
-        Thread child = new Thread(() -> {
-            for (int i = 0; i < 20; i++) {
-                counter++;
-                System.out.println(Thread.currentThread().getName() + " -> " + counter);
+class TimePrinter {
+    private int second = 1;
 
+    public synchronized void printSecond() {
+        while (second < 5000) {
+            try {
+                Thread.sleep(1000);
+                System.out.println(second);
+                second++;
+                notify();
+                wait();
+
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
-        }, "child" );
-        child.start();
-
-        for (int i = 0; i < 20 ; i++) {
-            counter++;
-            System.out.println(Thread.currentThread().getName() + " -> " + counter);
+            if (second % 5 == 0) {
+                try {
+                    wait(1);
+                    System.out.println(second);
+                    second++;
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                notify();
+            }
         }
-        System.out.println("child.getState() = " + child.getState());
-        new Thread(()-> System.out.println(main.getState())).start();
-        System.out.println("Thread.currentThread().getState() = " + Thread.currentThread().getState());
+    }
 
+    public synchronized void printFiveSeconds() {
+        while (second < 5000) {
+            if (second % 5 == 0) {
+                try {
+                    Thread.sleep(999);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println("5 seconds passed");
+                notify();
+            }
+            try {
+                notify();
+                wait();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+}
+
+class SecondsPrinter extends Thread {
+    private TimePrinter printer;
+
+    public SecondsPrinter(TimePrinter printer) {
+        this.printer = printer;
+        this.start();
+    }
+
+    @Override
+    public void run() {
+        printer.printSecond();
+    }
+}
+
+class FiveSecondsNotification extends Thread {
+    private TimePrinter printer;
+
+    public FiveSecondsNotification(TimePrinter printer) {
+        this.printer = printer;
+        this.start();
+    }
+
+    @Override
+    public void run() {
+        printer.printFiveSeconds();
     }
 }

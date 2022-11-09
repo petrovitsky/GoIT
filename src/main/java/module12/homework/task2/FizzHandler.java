@@ -1,9 +1,9 @@
 package module12.homework.task2;
 
-public class PrintNumber extends Thread {
+public class FizzHandler extends Thread{
     private FizzBuzz data;
 
-    public PrintNumber(FizzBuzz data) {
+    public FizzHandler(FizzBuzz data) {
         this.data = data;
         this.start();
     }
@@ -11,7 +11,7 @@ public class PrintNumber extends Thread {
     @Override
     public void run() {
         try {
-            data.number();
+            data.fizz();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

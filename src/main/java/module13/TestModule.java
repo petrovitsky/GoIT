@@ -9,7 +9,7 @@ public class TestModule {
     public static void main(String[] args) {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://pingponggoit.herokuapp.com/getUsers"))
+                .uri(URI.create("http://pingponggoit.herokuapp.com/getDefaultUser"))
                 .build();
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)

@@ -13,10 +13,7 @@ public interface MyDeque <E> extends MyQueue<E> {
     /**
      * Pops an element from the stack represented by this deque.  In other
      * words, removes and returns the first element of this deque.
-     *
-     * <p>This method is equivalent to {@link #removeFirst()}.
-     *
-     * @return the element at the front of this deque (which is the top
+     *@return the element at the front of this deque (which is the top
      *         of the stack represented by this deque)
      * @throws NoSuchElementException if this deque is empty
      */

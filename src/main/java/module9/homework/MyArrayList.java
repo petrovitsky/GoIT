@@ -80,7 +80,6 @@ public class MyArrayList<E> implements MyList<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<>() {
-
             private int index;
 
             @Override

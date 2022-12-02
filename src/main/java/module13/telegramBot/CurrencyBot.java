@@ -4,7 +4,9 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.ChatMemberUpdated;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -14,11 +16,11 @@ import java.util.List;
 public class CurrencyBot extends TelegramLongPollingBot {
     @Override
     public String getBotUsername() {
-        return "CurrencyBot";
+        return BotConstants.BOT_NAME;
     }
     @Override
     public String getBotToken() {
-        return "5766905218:AAHEToxEQvJLYQQQZoe5QgyrWfKJWcyqSJU";
+        return BotConstants.BOT_TOKEN;
     }
     @Override
     public void onUpdateReceived(Update update) {
@@ -33,7 +35,7 @@ public class CurrencyBot extends TelegramLongPollingBot {
             try {
                 Thread.sleep(1000);
                 execute(message); // Call method to send the message
-                sendCustomKeyboard(String.valueOf(update.getMessage().getChatId()));
+                sendInlineKeyboard(String.valueOf(update.getMessage().getChatId()));
             } catch (TelegramApiException | InterruptedException e) {
                 e.printStackTrace();
             }
@@ -42,7 +44,7 @@ public class CurrencyBot extends TelegramLongPollingBot {
     public void sendCustomKeyboard(String chatId) {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
-        message.setText("Custom message text");
+        message.setText("Кнопка нажата!");
 
         // Create ReplyKeyboardMarkup object
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
@@ -68,6 +70,42 @@ public class CurrencyBot extends TelegramLongPollingBot {
         keyboardMarkup.setKeyboard(keyboard);
         // Add it to the message
         message.setReplyMarkup(keyboardMarkup);
+
+        try {
+            // Send the message
+            execute(message);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendInlineKeyboard(String chatId) {
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText("Встроенная модель ниже");
+
+        // Create InlineKeyboardMarkup object
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        // Create the keyboard (list of InlineKeyboardButton list)
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        // Create a list for buttons
+        List<InlineKeyboardButton> Buttons = new ArrayList<InlineKeyboardButton>();
+        // Initialize each button, the text must be written
+        InlineKeyboardButton youtube= new InlineKeyboardButton("youtube");
+        // Also must use exactly one of the optional fields,it can edit  by set method
+        youtube.setUrl("https://www.youtube.com");
+        // Add button to the list
+        Buttons.add(youtube);
+        // Initialize each button, the text must be written
+        InlineKeyboardButton github= new InlineKeyboardButton("github");
+        // Also must use exactly one of the optional fields,it can edit  by set method
+        github.setUrl("https://github.com");
+        // Add button to the list
+        Buttons.add(github);
+        keyboard.add(Buttons);
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        // Add it to the message
+        message.setReplyMarkup(inlineKeyboardMarkup);
 
         try {
             // Send the message
